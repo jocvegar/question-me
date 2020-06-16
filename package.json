@@ -36,5 +36,14 @@
       "vue-cli-service lint",
       "git add"
     ]
+  },
+  "vue": {
+    "pwa": {
+      "name": "Preguntame",
+      "themeColor": "#f44336",
+      "msTileColor": "#000000",
+      "appleMobileWebAppCapable": "yes",
+      "appleMobileWebAppStatusBarStyle": "black"
+    }
   }
 }
