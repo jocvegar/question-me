@@ -1,8 +1,13 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" class="main-img" />
-    <FortuneTeller msg="¿Qué Está En Tu Mente?" />
+    <FortuneTeller
+      msg="¿Qué Está En Tu Mente?"
+      @onFucus="onFucusFromChild"
+      @onBlur="onBlurFromChild"
+    />
     <button
+      v-if="onFucus == false && onBlur == true"
       :class="buttonText == 'Noche' ? 'night' : 'day'"
       @click="darkThemeSwitch"
     >
@@ -21,7 +26,9 @@ export default {
   },
   data() {
     return {
-      buttonText: "Noche"
+      buttonText: "Noche",
+      onFucus: false,
+      onBlur: true
     };
   },
   mounted: function() {
@@ -34,6 +41,14 @@ export default {
     }
   },
   methods: {
+    onFucusFromChild(value) {
+      this.onFucus = value;
+      this.onBlur = !this.onBlur;
+    },
+    onBlurFromChild(value) {
+      this.onBlur = value;
+      this.onFucus = !this.onFucus;
+    },
     _addDarkTheme() {
       let darkThemeLinkEl = document.createElement("link");
       darkThemeLinkEl.setAttribute("rel", "stylesheet");

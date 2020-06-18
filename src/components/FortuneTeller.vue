@@ -1,8 +1,14 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <input type="text" v-model="question" placeholder="Preguntame..." />
-    <h3>{{ answer }}</h3>
+    <input
+      type="text"
+      v-model="question"
+      placeholder="Preguntame..."
+      @focus="$emit('onFucus', true)"
+      @blur="$emit('onBlur', true)"
+    />
+    <h4>{{ answer }}</h4>
   </div>
 </template>
 
@@ -61,7 +67,7 @@ export default {
 
 <style scoped lang="scss">
 h1,
-h3 {
+h4 {
   margin: 0.5rem 0 0;
 }
 input[type="text"] {
