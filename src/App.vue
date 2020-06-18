@@ -1,26 +1,36 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" class="main-img" />
-    <HelloWorld msg="HOLA JoC, como estas?" />
-    <button @click="darkThemeSwitch">Switch Theme</button>
+    <FortuneTeller msg="¿Qué Está En Tu Mente?" />
+    <button
+      :class="buttonText == 'Noche' ? 'night' : 'day'"
+      @click="darkThemeSwitch"
+    >
+      {{ buttonText }}
+    </button>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import FortuneTeller from "./components/FortuneTeller.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld
+    FortuneTeller
+  },
+  data() {
+    return {
+      buttonText: "Noche"
+    };
   },
   mounted: function() {
-    console.log("mounted!");
     const currentTheme = localStorage.getItem("theme")
       ? localStorage.getItem("theme")
       : null;
     if (currentTheme && currentTheme == "dark") {
       this._addDarkTheme();
+      this.buttonText = "Día";
     }
   },
   methods: {
@@ -43,9 +53,11 @@ export default {
       if (!darkThemeLinkEl) {
         this._addDarkTheme();
         localStorage.setItem("theme", "dark");
+        this.buttonText = "Día";
       } else {
         this._removeDarkTheme();
         localStorage.setItem("theme", "light");
+        this.buttonText = "Noche";
       }
     }
   }
@@ -53,24 +65,48 @@ export default {
 </script>
 
 <style lang="scss">
+*:focus {
+  outline: none;
+}
+body {
+  background-color: #f0f0f0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: space-around;
   align-items: center;
   align-content: stretch;
-  margin: 0 10vw;
+  margin: 2rem 10vw;
 }
-
 .main-img {
   width: 8em;
   height: 8em;
+}
+button {
+  border: none;
+  color: rgb(201, 201, 201);
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  padding: 10px 30px;
+  border-radius: 5px;
+  position: fixed;
+  bottom: 10vh;
+}
+.day {
+  background-color: rgba(126, 114, 8, 0.8);
+}
+.night {
+  background-color: rgba(0, 58, 124, 0.8);
 }
 </style>
