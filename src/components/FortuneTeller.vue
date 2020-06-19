@@ -8,7 +8,7 @@
       @focus="$emit('onFucus', true)"
       @blur="$emit('onBlur', true)"
     />
-    <h4>{{ answer }}</h4>
+    <h4>{{ answer | titleize }}</h4>
   </div>
 </template>
 
@@ -22,14 +22,17 @@ export default {
   },
   data() {
     return {
-      title: "pop shove-it shoveit manual",
       question: "",
       answer: ""
     };
   },
   filters: {
-    upcase: function(value) {
-      return value.toUpperCase();
+    titleize: function(value) {
+      if (!value) return;
+      return value
+        .split(" ")
+        .map(x => x.charAt(0).toUpperCase() + x.slice(1))
+        .join(" ");
     }
   },
   methods: {
@@ -41,7 +44,9 @@ export default {
         "no",
         "ahorita",
         "pizza",
-        "pueda que si"
+        "pueda que si",
+        "pueda que no",
+        "proba despues"
       ];
       if (this.question.length == 0) {
         this.answer = "";
@@ -50,12 +55,12 @@ export default {
         this.answer = "preguntas terminan con un '?'";
         return;
       }
-      this.answer = answers[Math.floor(Math.random() * 7)];
+      this.answer = answers[Math.floor(Math.random() * 9)];
     }
   },
   watch: {
     question: function() {
-      this.answer = "hmmm vamos a ver";
+      this.answer = "hmmm vamos a ver...";
       this.debouncedGetAnswer();
     }
   },
