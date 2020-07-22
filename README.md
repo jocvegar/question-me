@@ -2,6 +2,10 @@
 
 # Question Me
 
+```bash
+ Made using Vue.js
+```
+
 A fun little magic 8-ball clone
  
 [Ask away!](https://aynose.netlify.app/)
