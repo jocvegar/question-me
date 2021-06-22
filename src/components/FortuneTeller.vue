@@ -78,7 +78,7 @@ h4 {
 input[type="text"] {
   width: 100%;
   padding: 12px 20px;
-  margin: 8px 0;
+  margin: 20px 0;
   display: inline-block;
   border: 2px solid #ccc;
   border-radius: 4px;
